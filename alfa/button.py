@@ -1,0 +1,32 @@
+# create a wx frame with 6 wx buttons and optional tooltips
+# hide/disable and show/enable the buttons as they are clicked
+# also show right-click and double-click events
+# tested with Python24 and wxPython26 by    vegaseat   29may2006
+import wx
+class MyFrame(wx.Frame):
+    """make a frame, inherits wx.Frame"""
+    def __init__(self):
+        # create a frame, no parent, default to wxID_ANY
+        wx.Frame.__init__(self, None, wx.ID_ANY, 'wxButton',
+            pos=(300, 150), size=(320, 250))
+        self.SetBackgroundColour("green")
+        
+        self.button1 = wx.Button(self, id=-1, label='Button1',
+            pos=(8, 8), size=(175, 28))
+        self.button1.Bind(wx.EVT_BUTTON, self.button1Click)
+        # optional tooltip
+        self.button1.SetToolTip(wx.ToolTip("click to hide"))
+
+
+        
+        # show the frame
+        self.Show(True)
+    def button1Click(self,event):
+        self.button1.Hide()
+        self.SetTitle("Button1 clicked")
+        
+application = wx.PySimpleApp()
+# call class MyFrame
+window = MyFrame()
+# start the event loop
+application.MainLoop()
