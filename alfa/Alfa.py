@@ -1,3 +1,7 @@
+#! /usr/bin/python
+# -*- coding: utf-8 _*_
+#Alpha
+
 ######################################################
 ####    Alfa program to make something in GRB     ####
 #### Antonio Galvan, Nissim Fraija, Uriel Luviano ####
@@ -9,9 +13,10 @@
 #use of the program.
 try:
     import wx
+    from  ProgramWindow import ProgramWindow
 except ImportError:
-    errorMensaje = "Please, check all the dependences for alpha"
-    raise ImportError,errorMensaje
+    errorMessage = "Please, check all the dependences for alpha"
+    raise ImportError,errorMessage
 
 
 #Now we define the main class of the program
@@ -73,8 +78,10 @@ class Alfa(wx.Frame):
     def SelectFilesButton(self, event):            
          '''
          Create and show the file dialog to select the data files
-         of the experiments, and return the paths
+         of the experiments, and return the paths, in this button
+         we will call the new window of the program
          '''
+
          wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
          #.dat files for Alpha
          
@@ -98,12 +105,14 @@ class Alfa(wx.Frame):
              if elec == wx.ID_YES:
 
                  ##########################################################################
-                 ######## Here put the code of the change of basis and the other code #####
-                 ########                       to work on pyRoot              ############
+                 ######## Here put the code of the change window to use all the ###########
+                 ########                       to work on pyRoot               ###########
                  ##########################################################################
-                 pass
                  
-
+                 windowCalled = ProgramWindow(self)
+                 windowCalled.windowFather = self
+                 windowCalled.windowFather.Hide()
+                 windowCalled.Show()
 
              if elec == wx.ID_NO:
                  dial2 = wx.MessageDialog(None, "Please, chosse your files again.", "", wx.OK
@@ -111,10 +120,6 @@ class Alfa(wx.Frame):
                  result = dial2.ShowModal() == wx.OK
 
          dialog.Destroy()
-
-         
-
-
 
 if __name__ == "__main__":
     app = wx.App()

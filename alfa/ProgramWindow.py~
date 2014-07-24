@@ -1,0 +1,24 @@
+#! /usr/bin/python
+# -*- coding: utf-8 _*_
+
+######################################################
+#### Second frame from the program, in this frame ####
+####   we will use all the properties from Alpha  ####
+######################################################
+
+
+#We make sure that all the modules are correct import for the
+#use of the program.
+try:
+    import wx
+except ImportError:
+    errorMessage = "Please, check all the dependences for alpha"
+    raise ImportError,errorMessage
+
+
+class ProgramWindow(wx.Frame):
+    
+    def __init__(self, parent):
+        '''
+        Second frame from Alpha
+        '''
