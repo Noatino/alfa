@@ -16,6 +16,10 @@ except ImportError:
 
 #Now we define the main class of the program
 class Alfa(wx.Frame):
+
+    CTR = False #A flag to continue to the pyRootSection
+    paths = []  #Here we store the paths of the files
+
     def __init__(self, parent, id, title):
         wx.Frame.__init__(self, parent, id, title)
         self.parent = parent
@@ -29,6 +33,8 @@ class Alfa(wx.Frame):
         '''
         Initialize the main window of Alpha
         '''
+
+
 
         #A grid to make more easier the desing of the template
         grilla = wx.GridBagSizer()
@@ -50,6 +56,10 @@ class Alfa(wx.Frame):
         button = wx.Button(self,-1,label = 'Select files')
         grilla.Add(button,(7,3))
         button.Bind(wx.EVT_BUTTON, self.SelectFilesButton)
+        
+        if Alfa.CTR == True:
+            print True
+
 
         #The growable column of the grid, show an fit.
         grilla.AddGrowableCol(0)
@@ -63,14 +73,11 @@ class Alfa(wx.Frame):
     def SelectFilesButton(self, event):            
          '''
          Create and show the file dialog to select the data files
-         of the experiments
+         of the experiments, and return the paths
          '''
-
          wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
          #.dat files for Alpha
          
-
-         print 0 #del
          #Now we going to make the file dialog window
          dialog = wx.FileDialog(
              self, message = "Select the data files",
@@ -78,27 +85,36 @@ class Alfa(wx.Frame):
              wildcard = wildCard,
              style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR)
 
-         print 1 #del
-         #If the user make clik in the cancel button
-         if dialog.ShowModal() == wx.ID_CANCEL:
-             print 2 #del
-             print 'Fernanda'
-             dialog.Destroy()
-             return
-         print 3 #del
-         dialog.Destroy()
-         #If we select the correct files an push ok button then
-         if dialog.ShowModal() == wx.ID_OK:
-             print 4 #del
-             paths = dialog.GetPaths()
-             print "The files that you chose are"
-             for fileChose in paths:
-                 print fileChose
-                 dialog.Destroy()
-             return
-                 
-         dialog.Destroy()
+         election = dialog.ShowModal() #We store the election of the user here
          
+         if election == wx.ID_OK:
+             paths = dialog.GetPaths()
+             fc = ''
+             for x in paths:
+                 fc = fc+'\n'+x+'\n'
+             dial = wx.MessageDialog(None, fc, 'Are you sure to select this files?', wx.YES_NO
+                                     |wx.ICON_QUESTION)
+             elec = dial.ShowModal()
+             if elec == wx.ID_YES:
+
+                 ##########################################################################
+                 ######## Here put the code of the change of basis and the other code #####
+                 ########                       to work on pyRoot              ############
+                 ##########################################################################
+                 pass
+                 
+
+
+             if elec == wx.ID_NO:
+                 dial2 = wx.MessageDialog(None, "Please, chosse your files again.", "", wx.OK
+                                     |wx.ICON_INFORMATION)
+                 result = dial2.ShowModal() == wx.OK
+
+         dialog.Destroy()
+
+         
+
+
 
 if __name__ == "__main__":
     app = wx.App()
