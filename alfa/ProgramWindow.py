@@ -28,13 +28,31 @@ class ProgramWindow(wx.Frame):
 
         self.panel = wx.Panel(self,-1)
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(self.panel,1,wx.EXPAND,0)
+        sizer.Add(self.panel,1,wx.EXPAND,0)        
+
+        ##########################################################
+        ####              Below is the code for               ####
+        #### Convert the basis of the .dat files to log scale ####
+        ##########################################################
+
+        pass
+
+
+
+
+
+        ###########################################################
+
 
         self.SetSizer(sizer)
         self.Layout()
         self.Bind(wx.EVT_CLOSE, self.CloseWindow)
 
     def CloseWindow(self, event):
+        '''
+        Instructions for close this window
+        '''
+        
         self.windowFather.Show()
         self.Destroy()
 

@@ -3,7 +3,7 @@
 #Alpha
 
 ######################################################
-####    Alfa program to make something in GRB     ####
+####    Alfa program to make something in GRB's   ####
 #### Antonio Galvan, Nissim Fraija, Uriel Luviano ####
 ####Python 2.7, wxPython (classic) 3.0.0.0, pyRoot####
 ######################################################
@@ -106,7 +106,7 @@ class Alfa(wx.Frame):
 
                  ##########################################################################
                  ######## Here put the code of the change window to use all the ###########
-                 ########                       to work on pyRoot               ###########
+                 ########               options to work on pyRoot               ###########
                  ##########################################################################
                  
                  windowCalled = ProgramWindow(self)
