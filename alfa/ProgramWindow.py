@@ -13,6 +13,7 @@
 try:
     import wx
     import convertPoints as cp
+
 except ImportError:
     errorMessage = "Please, check all the dependences for alpha"
     raise ImportError,errorMessage
@@ -20,13 +21,15 @@ except ImportError:
 
 
 
+def _setPaths(filePaths):
+    global paths
+    paths = filePaths
+
 class ProgramWindow(wx.Frame):
 
     global flag #Flag for the check box
     flag = True
 
-    def setPaths(self, filePaths):
-        paths = filePaths
     
     def __init__(self, parent):
       
@@ -93,12 +96,16 @@ class ProgramWindow(wx.Frame):
         #####################################
         ### Here make the change of scale ###
         #####################################
-
+        try:
+            cp.convert_points(paths)
+        except:
+            pass
         if flag == True:
             #print "Chage basis with graph in ",flag
-            
+            cp.plot(paths)
         changeStatus.Disable()
         self.cb.Disable()
+        
 
 if __name__ == "__main__":
     app = wx.App(0)

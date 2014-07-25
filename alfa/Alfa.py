@@ -21,11 +21,13 @@ except ImportError:
 
 
 #Now we define the main class of the program
+
+
 class Alfa(wx.Frame):
 
     CTR = False #A flag to continue to the pyRootSection
-    global paths #We need this var 
-    paths = []  #Here we store the paths of the files
+
+
 
     def __init__(self, parent, id, title):
         wx.Frame.__init__(self, parent, id, title)
@@ -101,7 +103,7 @@ class Alfa(wx.Frame):
 
              # Store all the paths of the files with the data experiments in a list
              paths = dialog.GetPaths()
-            
+             ProgramWindow._setPaths(paths)
              fc = '' # Just take the paths into an string to dialog box
              for x in paths:
                  fc = fc+'\n'+x+'\n'
