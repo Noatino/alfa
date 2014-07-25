@@ -6,6 +6,7 @@
 ####    Alfa program to make something in GRB's   ####
 #### Antonio Galvan, Nissim Fraija, Uriel Luviano ####
 ####Python 2.7, wxPython (classic) 3.0.0.0, pyRoot####
+####                 matplotlib                   ####
 ######################################################
 
 
@@ -13,7 +14,7 @@
 #use of the program.
 try:
     import wx
-    from  ProgramWindow import ProgramWindow
+    import ProgramWindow
 except ImportError:
     errorMessage = "Please, check all the dependences for alpha"
     raise ImportError,errorMessage
@@ -23,6 +24,7 @@ except ImportError:
 class Alfa(wx.Frame):
 
     CTR = False #A flag to continue to the pyRootSection
+    global paths #We need this var 
     paths = []  #Here we store the paths of the files
 
     def __init__(self, parent, id, title):
@@ -69,6 +71,7 @@ class Alfa(wx.Frame):
         #The growable column of the grid, show an fit.
         grilla.AddGrowableCol(0)
         self.SetSizerAndFit(grilla)
+        self.Centre()
         self.Show(True)
         
         ############################################################
@@ -95,10 +98,15 @@ class Alfa(wx.Frame):
          election = dialog.ShowModal() #We store the election of the user here
          
          if election == wx.ID_OK:
+
+             # Store all the paths of the files with the data experiments in a list
              paths = dialog.GetPaths()
-             fc = ''
+            
+             fc = '' # Just take the paths into an string to dialog box
              for x in paths:
                  fc = fc+'\n'+x+'\n'
+
+             #Dialog box of the files select
              dial = wx.MessageDialog(None, fc, 'Are you sure to select this files?', wx.YES_NO
                                      |wx.ICON_QUESTION)
              elec = dial.ShowModal()
@@ -109,12 +117,18 @@ class Alfa(wx.Frame):
                  ########               options to work on pyRoot               ###########
                  ##########################################################################
                  
-                 windowCalled = ProgramWindow(self)
+                 windowCalled = ProgramWindow.ProgramWindow(self)
                  windowCalled.windowFather = self
                  windowCalled.windowFather.Hide()
                  windowCalled.Show()
 
              if elec == wx.ID_NO:
+                 
+                 ##########################################################################
+                 ####### If the user click the cancel button, then, the program ###########
+                 #######               going back to the main window            ###########
+                 ##########################################################################
+
                  dial2 = wx.MessageDialog(None, "Please, chosse your files again.", "", wx.OK
                                      |wx.ICON_INFORMATION)
                  result = dial2.ShowModal() == wx.OK
