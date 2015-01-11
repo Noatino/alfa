@@ -59,6 +59,10 @@ class Alpha(wx.Frame):
         global Rpanel
         Rpanel = wx.Panel(self, -1, style = wx.SIMPLE_BORDER)
         
+        #In this list, we gonna store the file's paths
+        global paths
+        paths = []
+        
         
         title.Add(Tpanel, 1, wx.EXPAND | wx.ALL, 3)
         vbox1.Add(Lpanel, 1, wx.EXPAND | wx.ALL, 3)
@@ -66,7 +70,7 @@ class Alpha(wx.Frame):
 
         #######################################################################################
         #Welcome message
-        wx.StaticText(Tpanel, -1, "Hello, the finally of this program is...", pos = (10,10))
+        wx.StaticText(Tpanel, -1, "Hello, the finally of this program is ... ", pos = (10,10))
         #######################################################################################
 
         #######################################################################################
@@ -81,13 +85,13 @@ class Alpha(wx.Frame):
         #**Open files
         #######################################################################################
         self.buttonCharge = wx.Button(Lpanel,10,"Charge files" ,(10,30))
-        wx.StaticText(Lpanel, -1, "Clic to charge your \n experiment files", pos = (10,60))
+        wx.StaticText(Lpanel, -1, "Click to charge your \n experiment files", pos = (10,60))
         self.Bind(wx.EVT_BUTTON, self.chargeFiles, id = 10)
 
         #######################################################################################
         #** Rigth Panel
         #######################################################################################
-        StringTextWelcome = "Welcome, tanks to use Alpha for you research"
+        StringTextWelcome = "Welcome, thanks to use Alpha for you research"
         self.messageWelcome = wx.StaticText(Rpanel,-1,StringTextWelcome , pos=(20,10))
         
         StringTextFiles = "Would you like make a change of basis of your files?"
@@ -100,7 +104,8 @@ class Alpha(wx.Frame):
         #**Sincrotron radation
         #######################################################################################
         self.buttonSinc = wx.Button(Lpanel,11,"Sincrotron fit Root" ,(10,100))
-        wx.StaticText(Lpanel, -1, "Make fit of the Synchrotron \n radiation" , pos = (10,130))
+        StringTextSycn = "Make fit of the Synchrotron \n scattering"
+        wx.StaticText(Lpanel, -1, StringTextSycn, pos = (10,130))
         self.Bind(wx.EVT_BUTTON, self.SincRoot, id = 11)
 
         #######################################################################################
@@ -125,6 +130,14 @@ class Alpha(wx.Frame):
         wx.StaticText(Lpanel, -1, "Make the smoothing of the graph" , pos = (10,330))
         self.Bind(wx.EVT_BUTTON, self.SGraph, id = 13)
 
+        ########################################################################################
+        #** Exit button
+        ########################################################################################
+        self.buttonEX = wx.Button(Lpanel,14,"Exit" ,(10,350))
+        wx.StaticText(Lpanel, -1, "Close the program" , pos = (10,390))
+        self.Bind(wx.EVT_BUTTON, self.Evtexit, id = 14)
+        
+
         #########################################################################
         ### Put a flag to disable the buttons on the main window ################
         #########################################################################
@@ -142,7 +155,6 @@ class Alpha(wx.Frame):
         self.Show(True)
 
         ############ End of initialize ########################################################### 
-
 
 
     def chargeFiles(self, event):
@@ -163,13 +175,23 @@ class Alpha(wx.Frame):
             style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR)
         election = dialog.ShowModal() #We store the election of the user here
         if election == wx.ID_OK:
-            # Store all the paths of the files with the data experiments in a list
-            paths = dialog.GetPaths()
-            fc = '' # Just take the paths into an string to dialog box
+            #######################################################################
+            # Store all the paths of the files with the data experiments in a list#
+            #######################################################################
+            #### I need think in another efficient method for the elements     ####
+            #### duplicates.                                                   ####
+            tmp_p = dialog.GetPaths()                                          ####
+            for elem in tmp_p :                                                ####
+                if elem in paths:                                              ####
+                    tmp_p.remove(elem)                                         ####
+            paths.extend(tmp_p)                                                ####
+                                                                               ####
+            #######################################################################
+            global lBox
+            lBox =  wx.CheckListBox(Rpanel, choices = paths)
             
-            for x in paths:
-                fc = fc+'\n'+x+'\n'
-
+        else:
+            return
 
         ###########################################################################
         ########## Now I will enable and show all elements with I can't see  ######
@@ -192,6 +214,8 @@ class Alpha(wx.Frame):
         ###########################################################################
         ########## I will now appear all the panel of synchrotron radation   ######
         ###########################################################################
+        self.messageWelcome.Show(False)
+        self.messageCharge.Show(False)
         self.TextoSync.Show(True)                                            ######
         ###########################################################################
         
@@ -213,6 +237,23 @@ class Alpha(wx.Frame):
         
         pass
 
+
+
+    def Evtexit(self, event):
+        '''
+        Close the program
+        '''
+        mess1 = 'Remember'
+        mess2 = 'Thanks to use Alpha, please if you used by you research please cite as @'
+        mess3 = '\n Do you want close the program?'
+        dial = wx.MessageDialog(None, mess2+mess3, mess1,
+            wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+            
+        ret = dial.ShowModal()
+        
+        if ret == wx.ID_YES:
+            self.Destroy()
+            quit()
 
         
 if __name__ == "__main__":
