@@ -180,7 +180,14 @@ class Alpha(wx.Frame):
             #######################################################################
             #### I need think in another efficient method for the elements     ####
             #### duplicates.                                                   ####
-            tmp_p = dialog.GetPaths()                                          ####
+            tmp_p = dialog.GetPaths()
+
+            cadenita = tmp_p[0]
+            print cadenita
+            
+
+            
+
             for elem in tmp_p :                                                ####
                 if elem in paths:                                              ####
                     tmp_p.remove(elem)                                         ####
@@ -188,7 +195,9 @@ class Alpha(wx.Frame):
                                                                                ####
             #######################################################################
             global lBox
-            lBox =  wx.CheckListBox(Rpanel, choices = paths)
+            lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = paths,
+                                    size = (400,350))
+            vbox2.Add(lBox)
             
         else:
             return
