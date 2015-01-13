@@ -62,7 +62,11 @@ class Alpha(wx.Frame):
         #In this list, we gonna store the file's paths
         global paths
         paths = []
-        
+        global display
+        display = []
+
+        #This is the box of the control list of the rigth panel
+        global lBox
         
         title.Add(Tpanel, 1, wx.EXPAND | wx.ALL, 3)
         vbox1.Add(Lpanel, 1, wx.EXPAND | wx.ALL, 3)
@@ -178,23 +182,17 @@ class Alpha(wx.Frame):
             #######################################################################
             # Store all the paths of the files with the data experiments in a list#
             #######################################################################
-            #### I need think in another efficient method for the elements     ####
-            #### duplicates.                                                   ####
+            #### I need to do something that I don't repeat elements in the    ####
+            #### list and                                                   ####
             tmp_p = dialog.GetPaths()
 
-            cadenita = tmp_p[0]
-            print cadenita
-            
-
-            
-
-            for elem in tmp_p :                                                ####
-                if elem in paths:                                              ####
-                    tmp_p.remove(elem)                                         ####
+            for path in tmp_p:
+                tmp = path.split('/')
+                print tmp
+ 
             paths.extend(tmp_p)                                                ####
                                                                                ####
             #######################################################################
-            global lBox
             lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = paths,
                                     size = (400,350))
             vbox2.Add(lBox)
