@@ -168,7 +168,11 @@ class Alpha(wx.Frame):
         Create and show the file dialog to select the data files
         of the experiments, and return the paths, in this button
         we will call the new window of the program
-        '''        
+        '''
+
+        self.TextoSync.Show(False)
+        self.messageCharge.Show(True)
+        
         wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
         #.dat files for Alpha
         #Now we going to make the file dialog window
@@ -188,12 +192,12 @@ class Alpha(wx.Frame):
 
             for path in tmp_p:
                 tmp = path.split('/')
-                print tmp
- 
+                path1 = '/'+tmp[len(tmp)-1]
+                display.extend([path1])
             paths.extend(tmp_p)                                                ####
                                                                                ####
             #######################################################################
-            lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = paths,
+            lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = display,
                                     size = (400,350))
             vbox2.Add(lBox)
             
