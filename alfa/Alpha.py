@@ -1,10 +1,11 @@
-#! /usr/bin/python
+
 # -*- coding: utf-8 _*_
 #Alpha
 
 ######################################################
 ####    Alfa program to make something in GRB's   ####
-#### Antonio Galvan, Nissim Fraija, Uriel Luviano ####
+#### Antonio Galvan  agalvan@astro.unam.mx        ####
+#### Nissim Fraija   nifraija@astro.unam.mx       ####
 ####Python 2.7, wxPython (classic) 3.0.0.0, pyRoot####
 ####                  matplotlib                  ####
 ######################################################
@@ -64,6 +65,7 @@ class Alpha(wx.Frame):
         paths = []
         global display
         display = []
+        StringTextHeader = "Hello, this program will help you to make the SED of your favorite AGN"
 
         #This is the box of the control list of the rigth panel
         global lBox
@@ -74,7 +76,7 @@ class Alpha(wx.Frame):
 
         #######################################################################################
         #Welcome message
-        wx.StaticText(Tpanel, -1, "Hello, the finally of this program is ... ", pos = (10,10))
+        wx.StaticText(Tpanel, -1, StringTextHeader, pos = (10,10))
         #######################################################################################
 
         #######################################################################################
@@ -95,7 +97,7 @@ class Alpha(wx.Frame):
         #######################################################################################
         #** Rigth Panel
         #######################################################################################
-        StringTextWelcome = "Welcome, thanks to use Alpha for you research"
+        StringTextWelcome = "Welcome, please select the files that you will use."
         self.messageWelcome = wx.StaticText(Rpanel,-1,StringTextWelcome , pos=(20,10))
         
         StringTextFiles = "Would you like make a change of basis of your files?"
@@ -171,7 +173,7 @@ class Alpha(wx.Frame):
         '''
 
         self.TextoSync.Show(False)
-        self.messageCharge.Show(True)
+        self.messageCharge.Show(False)
         
         wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
         #.dat files for Alpha
@@ -199,11 +201,12 @@ class Alpha(wx.Frame):
             #######################################################################
             lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = display,
                                     size = (400,350))
+            lBox.Add
+            
             vbox2.Add(lBox)
             
         else:
-            return
-
+            pass
         ###########################################################################
         ########## Now I will enable and show all elements with I can't see  ######
         ###########################################################################
