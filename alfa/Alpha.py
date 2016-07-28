@@ -92,7 +92,7 @@ class Alpha(wx.Frame):
         #######################################################################################
         self.buttonCharge = wx.Button(Lpanel,10,"Charge files" ,(10,30))
         wx.StaticText(Lpanel, -1, "Click to charge your \n experiment files", pos = (10,60))
-        self.Bind(wx.EVT_BUTTON, self.chargeFiles, id = 10)
+        self.Bind(wx.EVT_BUTTON, self.charge_button, id = 10)
 
         #######################################################################################
         #** Rigth Panel
@@ -100,9 +100,13 @@ class Alpha(wx.Frame):
         StringTextWelcome = "Welcome, please select the files that you will use."
         self.messageWelcome = wx.StaticText(Rpanel,-1,StringTextWelcome , pos=(20,10))
         
-        StringTextFiles = "Would you like make a change of basis of your files?"
+        StringTextFiles = "Please, select the files in their respective emission radiation process"
         self.messageCharge = wx.StaticText(Rpanel,-1,StringTextFiles , pos=(20,10))
         self.messageCharge.Show(False)
+
+        
+
+
 
 
 
@@ -117,7 +121,7 @@ class Alpha(wx.Frame):
         #######################################################################################
         #** Rigth Panel
         #######################################################################################
-        StringTextSync = "Please, selec the files with I do the fit of the emission of Synchrotron"
+        StringTextSync = "Please, give me the parameters to do the fit of the Syncrotron Scattering"
         self.TextoSync = wx.StaticText(Rpanel,-1, StringTextSync , pos=(20,10))
         self.TextoSync.Show(False)
         
@@ -194,31 +198,32 @@ class Alpha(wx.Frame):
 
             for path in tmp_p:
                 tmp = path.split('/')
-                path1 = '/'+tmp[len(tmp)-1]
+                path1 = tmp[len(tmp)-1]
                 display.extend([path1])
             paths.extend(tmp_p)                                                ####
                                                                                ####
             #######################################################################
-            lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = display,
+            self.lBox =  wx.CheckListBox(Rpanel, id = 15, pos = (20,40),choices = display,
                                     size = (400,350))
-            lBox.Add
             
-            vbox2.Add(lBox)
             
-        else:
-            pass
-        ###########################################################################
-        ########## Now I will enable and show all elements with I can't see  ######
-        ###########################################################################
-        self.buttonSinc.Enable()    # Now we gonna go to enable the buttons  ######
-        self.buttonComp.Enable()    # and then we can work with the other    ######
-        self.buttonSG.Enable()      # modules of the program.                ######
-        self.messageCharge.Show(True)                                        ######
-        ###########################################################################
-        ########## Now I disable all the elements of the principal frame     ######
-        ###########################################################################
-        self.messageWelcome.Show(False)                                      ######
-        ###########################################################################
+            vbox2.Add(self.lBox)
+
+            ###########################################################
+            
+            if paths != []:
+                ###########################################################################
+                ########## Now I will enable and show all elements with I can't see  ######
+                ###########################################################################
+                self.buttonSinc.Enable()    # Now we gonna go to enable the buttons  ######
+                self.buttonComp.Enable()    # and then we can work with the other    ######
+                self.buttonSG.Enable()      # modules of the program.                ######
+                self.messageCharge.Show(True)                                        ######
+                ###########################################################################
+                ########## Now I disable all the elements of the principal frame     ######
+                ###########################################################################
+                self.messageWelcome.Show(False)                                      ######
+                ###########################################################################
 
 
     def SincRoot(self, event):
@@ -226,13 +231,14 @@ class Alpha(wx.Frame):
         Invoque the frame to make the fit on the Synchrotron radiation
         '''
         ###########################################################################
-        ########## I will now appear all the panel of synchrotron radation   ######
+        ########## I will now disappear all the not sync elements of the panel ####
         ###########################################################################
         self.messageWelcome.Show(False)
         self.messageCharge.Show(False)
-        self.TextoSync.Show(True)                                            ######
+        self.lBox.Show(False)
         ###########################################################################
-        
+        self.TextoSync.Show(True)
+        self.buttonCharge.Show(False)
 
 
         pass
@@ -251,7 +257,18 @@ class Alpha(wx.Frame):
         
         pass
 
-
+    def charge_button(self, event):
+        '''
+        Generate the configuration to see the screen of charge files
+        '''
+        self.buttonCharge = wx.Button(Rpanel,15, "Load Files", (600,390))
+        self.Bind(wx.EVT_BUTTON, self.chargeFiles, id = 15)
+        try:
+            self.lBox.Show(True)
+        except AttributeError as e:
+            #Really I dont wanna do nothing in this exceptio because can be generate
+            #the firts time that I click the button
+            pass
 
     def Evtexit(self, event):
         '''
@@ -261,7 +278,7 @@ class Alpha(wx.Frame):
         mess2 = 'Thanks to use Alpha, please if you used by you research please cite as @'
         mess3 = '\n Do you want close the program?'
         dial = wx.MessageDialog(None, mess2+mess3, mess1,
-            wx.YES_NO | wx.NO_DEFAULT | wx.ICON_QUESTION)
+            wx.YES_NO | wx.YES_DEFAULT | wx.ICON_QUESTION)
             
         ret = dial.ShowModal()
         
