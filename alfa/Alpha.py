@@ -105,25 +105,121 @@ class Alpha(wx.Frame):
         self.messageCharge.Show(False)
 
         
-
-
-
-
-
-        #######################################################################################
-        #**Sincrotron radation
-        #######################################################################################
-        self.buttonSinc = wx.Button(Lpanel,11,"Sincrotron fit Root" ,(10,100))
-        StringTextSycn = "Make fit of the Synchrotron \n scattering"
-        wx.StaticText(Lpanel, -1, StringTextSycn, pos = (10,130))
-        self.Bind(wx.EVT_BUTTON, self.SincRoot, id = 11)
-
         #######################################################################################
         #** Rigth Panel
         #######################################################################################
+
+
+        #######################################################################################
+        ### Elements to use on the syncrotron scattering panel
+        #######################################################################################
+
         StringTextSync = "Please, give me the parameters to do the fit of the Syncrotron Scattering"
         self.TextoSync = wx.StaticText(Rpanel,-1, StringTextSync , pos=(20,10))
         self.TextoSync.Show(False)
+
+
+        #######################################################################################
+        ### Definition of the elements of the syncrotron screen
+        #######################################################################################
+
+
+        self.buttonSync = wx.Button(Lpanel,11,"Syncrotron fit Root" ,(10,100))
+        StringTextSycn = "Make fit of the Synchrotron \n scattering"
+        wx.StaticText(Lpanel, -1, StringTextSycn, pos = (10,130))
+        self.Bind(wx.EVT_BUTTON, self.SyncRoot, id = 11)
+
+        
+
+        #A0 box parameters
+        A0Label = "A0 parameter"
+        self.A0ValTextSync = wx.StaticText(Rpanel, -1, A0Label, pos=(20,30)) #pos = (x,y)
+        self.A0ValTextSync.Show(False)
+        self.A0val = wx.TextCtrl(Rpanel, -1, "ASync value", pos=(180,30), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixA0 = wx.CheckBox(Rpanel, -1, "Fix A0", pos = (310, 30))
+        
+        A0Label = "A0 parameter range"
+        self.A0ValTextSync = wx.StaticText(Rpanel, -1, A0Label, pos=(20,60)) #pos = (x,y)
+        self.A0valXmin = wx.TextCtrl(Rpanel, -1, "A0 min value", pos=(180,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.A0valXmax = wx.TextCtrl(Rpanel, -1, "A0 max value", pos=(310,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
+
+
+        #alfa box parameters
+        alfaLabel = "Alfa parameter"
+        self.alfaValTextSync = wx.StaticText(Rpanel, -1, alfaLabel, pos=(20,90)) #pos = (x,y)
+        self.alfaValTextSync.Show(False)
+        self.alfaval = wx.TextCtrl(Rpanel, -1, "Alfa value", pos=(180,90), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixalfa = wx.CheckBox(Rpanel, -1, "Fix Alfa", pos = (310, 90))
+        alfaLabel = "Alfa parameter range"
+        self.alfaValTextSync = wx.StaticText(Rpanel, -1, alfaLabel, pos=(20,120)) #pos = (x,y)
+        self.alfavalXmin = wx.TextCtrl(Rpanel, -1, "Alfa min value", pos=(180,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.alfavalXmax = wx.TextCtrl(Rpanel, -1, "Alfa max value", pos=(310,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        
+
+
+        #Emin box parameters
+        EminLabel = "Emin parameter"
+        self.EminValTextSync = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,150)) #pos = (x,y)
+        self.EminValTextSync.Show(False)
+        self.Eminval = wx.TextCtrl(Rpanel, -1, "Emin value", pos=(180,150), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixEmin = wx.CheckBox(Rpanel, -1, "Fix Emin", pos = (310, 150))
+        EminLabel = "Emin parameter range"
+        self.EminValTextSync = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,180)) #pos = (x,y)
+        self.EminvalXmin = wx.TextCtrl(Rpanel, -1, "Emin min value", pos=(180,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.EminvalXmax = wx.TextCtrl(Rpanel, -1, "Emin max value", pos=(310,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
+
+
+        #Ecut box parameters
+        EcutLabel = "Ecut parameter"
+        self.EcutValTextSync = wx.StaticText(Rpanel, -1, EcutLabel, pos=(20,210)) #pos = (x,y)
+        self.EcutValTextSync.Show(False)
+        self.Ecutval = wx.TextCtrl(Rpanel, -1, "Ecut value", pos=(180,210), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixEcut = wx.CheckBox(Rpanel, -1, "Fix Ecut", pos = (310, 210))
+        EcutLabel = "Ecut parameter range"
+        self.EcutValTextSync = wx.StaticText(Rpanel, -1, EcutLabel, pos=(20,240)) #pos = (x,y)
+        self.EcutvalXmin = wx.TextCtrl(Rpanel, -1, "Ecut min value", pos=(180,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.EcutvalXmax = wx.TextCtrl(Rpanel, -1, "Ecut max value", pos=(310,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        
+
+        #Fit button
+        self.buttonChargeSVal = wx.Button(Rpanel,16, "Fit", (600,390))
+        self.Bind(wx.EVT_BUTTON, self.getValues_fit_sync, id = 16)
+
+
+        ########################################################################################
+        ### Now I will disapear all the elements of this screen
+        ########################################################################################
+        self.A0ValTextSync.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EcutValTextSync.Show(False)
+        #---
+        self.A0ValTextSync.Show(False)
+        self.A0val.Show(False)
+        self.fixA0.Show(False)
+        self.A0ValTextSync.Show(False)
+        self.A0valXmin.Show(False)
+        self.A0valXmax.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfaval.Show(False)
+        self.fixalfa.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfavalXmin.Show(False)
+        self.alfavalXmax.Show(False)
+        self.EminValTextSync.Show(False)
+        self.Eminval.Show(False)
+        self.fixEmin.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EminvalXmin.Show(False)
+        self.EminvalXmax.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.Ecutval.Show(False)
+        self.fixEcut.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.EcutvalXmin.Show(False)
+        self.EcutvalXmax.Show(False)
+        self.buttonChargeSVal.Show(False)
+        #--
         
 
         ########################################################################################
@@ -151,7 +247,7 @@ class Alpha(wx.Frame):
         #########################################################################
         ### Put a flag to disable the buttons on the main window ################
         #########################################################################
-        self.buttonSinc.Disable()                  ##############################
+        self.buttonSync.Disable()                  ##############################
         self.buttonComp.Disable()                  ##############################
         self.buttonSG.Disable()                    ##############################
                                                    ##############################
@@ -176,8 +272,47 @@ class Alpha(wx.Frame):
         we will call the new window of the program
         '''
 
-        self.TextoSync.Show(False)
+
+        
+        ########################################################################################
         self.messageCharge.Show(False)
+        ########################################################################################
+        ### Now I will disapear all the elements of Syncrotron
+        ########################################################################################
+        self.TextoSync.Show(False)
+        self.A0ValTextSync.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EcutValTextSync.Show(False)
+        #---
+        self.A0ValTextSync.Show(False)
+        self.A0val.Show(False)
+        self.fixA0.Show(False)
+        self.A0ValTextSync.Show(False)
+        self.A0valXmin.Show(False)
+        self.A0valXmax.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfaval.Show(False)
+        self.fixalfa.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfavalXmin.Show(False)
+        self.alfavalXmax.Show(False)
+        self.EminValTextSync.Show(False)
+        self.Eminval.Show(False)
+        self.fixEmin.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EminvalXmin.Show(False)
+        self.EminvalXmax.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.Ecutval.Show(False)
+        self.fixEcut.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.EcutvalXmin.Show(False)
+        self.EcutvalXmax.Show(False)
+        self.buttonChargeSVal.Show(False)
+        #--
+        ########################################################################################
+        
         
         wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
         #.dat files for Alpha
@@ -215,7 +350,7 @@ class Alpha(wx.Frame):
                 ###########################################################################
                 ########## Now I will enable and show all elements with I can't see  ######
                 ###########################################################################
-                self.buttonSinc.Enable()    # Now we gonna go to enable the buttons  ######
+                self.buttonSync.Enable()    # Now we gonna go to enable the buttons  ######
                 self.buttonComp.Enable()    # and then we can work with the other    ######
                 self.buttonSG.Enable()      # modules of the program.                ######
                 self.messageCharge.Show(True)                                        ######
@@ -226,7 +361,7 @@ class Alpha(wx.Frame):
                 ###########################################################################
 
 
-    def SincRoot(self, event):
+    def SyncRoot(self, event):
         '''
         Invoque the frame to make the fit on the Synchrotron radiation
         '''
@@ -236,17 +371,92 @@ class Alpha(wx.Frame):
         self.messageWelcome.Show(False)
         self.messageCharge.Show(False)
         self.lBox.Show(False)
+        self.buttonCharge.Show(False)
+        
+        ###########################################################################
+        #Now I will define the elements that could be on the fit parameters    ####
         ###########################################################################
         self.TextoSync.Show(True)
-        self.buttonCharge.Show(False)
+        self.A0ValTextSync.Show(True)
+        self.alfaValTextSync.Show(True)
+        self.EminValTextSync.Show(True)
+        self.EcutValTextSync.Show(True)
+        #---
+        self.A0ValTextSync.Show(True)
+        self.alfaValTextSync.Show(True)
+        self.EminValTextSync.Show(True)
+        self.EcutValTextSync.Show(True)
+        #---
+        self.A0ValTextSync.Show(True)
+        self.A0val.Show(True)
+        self.fixA0.Show(True)
+        self.A0ValTextSync.Show(True)
+        self.A0valXmin.Show(True)
+        self.A0valXmax.Show(True)
+        self.alfaValTextSync.Show(True)
+        self.alfaval.Show(True)
+        self.fixalfa.Show(True)
+        self.alfaValTextSync.Show(True)
+        self.alfavalXmin.Show(True)
+        self.alfavalXmax.Show(True)
+        self.EminValTextSync.Show(True)
+        self.Eminval.Show(True)
+        self.fixEmin.Show(True)
+        self.EminValTextSync.Show(True)
+        self.EminvalXmin.Show(True)
+        self.EminvalXmax.Show(True)
+        self.EcutValTextSync.Show(True)
+        self.Ecutval.Show(True)
+        self.fixEcut.Show(True)
+        self.EcutValTextSync.Show(True)
+        self.EcutvalXmin.Show(True)
+        self.EcutvalXmax.Show(True)
+        ###########################################################################
 
-
-        pass
+        #Button to load the fit parameters of syncrotron radiation
+        self.buttonChargeSVal.Show(True)
+        
+        return
 
     def InvCom(self, event):
         ''' 
         Invoque the window to make the fit on the Inverse Compton Scattering
         '''
+
+        ########################################################################################
+        ### Now I will disapear all the elements of this screen
+        ########################################################################################
+        self.A0ValTextSync.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EcutValTextSync.Show(False)
+        #---
+        self.A0ValTextSync.Show(False)
+        self.A0val.Show(False)
+        self.fixA0.Show(False)
+        self.A0ValTextSync.Show(False)
+        self.A0valXmin.Show(False)
+        self.A0valXmax.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfaval.Show(False)
+        self.fixalfa.Show(False)
+        self.alfaValTextSync.Show(False)
+        self.alfavalXmin.Show(False)
+        self.alfavalXmax.Show(False)
+        self.EminValTextSync.Show(False)
+        self.Eminval.Show(False)
+        self.fixEmin.Show(False)
+        self.EminValTextSync.Show(False)
+        self.EminvalXmin.Show(False)
+        self.EminvalXmax.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.Ecutval.Show(False)
+        self.fixEcut.Show(False)
+        self.EcutValTextSync.Show(False)
+        self.EcutvalXmin.Show(False)
+        self.EcutvalXmax.Show(False)
+        self.buttonChargeSVal.Show(False)
+        #--
         
         pass
 
@@ -261,14 +471,42 @@ class Alpha(wx.Frame):
         '''
         Generate the configuration to see the screen of charge files
         '''
+
+        ###################################################################
+        #  Desable the elems from the Syncrotron Scattering panel    ######
+        #                                                            ######
+        try:
+            self.A0ValTextSync.Show(False)
+            self.buttonChargeSVal.Show(False)
+            self.A0val.Show(False)
+        except AttributeError as e:
+            #Really I dont wanna do nothing in this exception because can be generate
+            #the firts time that I click the button
+            print "Err"
+            pass
+        ###################################################################
+
+        self.messageCharge.Show(True)
+        self.messageWelcome.Show(False)
+        self.TextoSync.Show(False)
         self.buttonCharge = wx.Button(Rpanel,15, "Load Files", (600,390))
         self.Bind(wx.EVT_BUTTON, self.chargeFiles, id = 15)
         try:
             self.lBox.Show(True)
+            self.fixA0.Show(False)
         except AttributeError as e:
             #Really I dont wanna do nothing in this exceptio because can be generate
             #the firts time that I click the button
+            print "Err"
             pass
+
+
+    def getValues_fit_sync(self, event):
+        stringValue10 = self.A0val.GetValue()
+        print stringValue10, "Ann"
+        return
+
+
 
     def Evtexit(self, event):
         '''
