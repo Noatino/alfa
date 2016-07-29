@@ -113,37 +113,26 @@ class Alpha(wx.Frame):
         #######################################################################################
         ### Elements to use on the syncrotron scattering panel
         #######################################################################################
-
         StringTextSync = "Please, give me the parameters to do the fit of the Syncrotron Scattering"
         self.TextoSync = wx.StaticText(Rpanel,-1, StringTextSync , pos=(20,10))
         self.TextoSync.Show(False)
-
-
         #######################################################################################
         ### Definition of the elements of the syncrotron screen
         #######################################################################################
-
-
         self.buttonSync = wx.Button(Lpanel,11,"Syncrotron fit Root" ,(10,100))
         StringTextSycn = "Make fit of the Synchrotron \n scattering"
         wx.StaticText(Lpanel, -1, StringTextSycn, pos = (10,130))
         self.Bind(wx.EVT_BUTTON, self.SyncRoot, id = 11)
-
-        
-
         #A0 box parameters
         A0Label = "A0 parameter"
         self.A0ValTextSync = wx.StaticText(Rpanel, -1, A0Label, pos=(20,30)) #pos = (x,y)
         self.A0ValTextSync.Show(False)
         self.A0val = wx.TextCtrl(Rpanel, -1, "ASync value", pos=(180,30), size=(100,25), style=wx.TE_PROCESS_ENTER)
-        self.fixA0 = wx.CheckBox(Rpanel, -1, "Fix A0", pos = (310, 30))
-        
+        self.fixA0 = wx.CheckBox(Rpanel, -1, "Fix A0", pos = (310, 30))        
         A0Label = "A0 parameter range"
         self.A0ValTextSync = wx.StaticText(Rpanel, -1, A0Label, pos=(20,60)) #pos = (x,y)
         self.A0valXmin = wx.TextCtrl(Rpanel, -1, "A0 min value", pos=(180,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
         self.A0valXmax = wx.TextCtrl(Rpanel, -1, "A0 max value", pos=(310,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
-
-
         #alfa box parameters
         alfaLabel = "Alfa parameter"
         self.alfaValTextSync = wx.StaticText(Rpanel, -1, alfaLabel, pos=(20,90)) #pos = (x,y)
@@ -154,9 +143,6 @@ class Alpha(wx.Frame):
         self.alfaValTextSync = wx.StaticText(Rpanel, -1, alfaLabel, pos=(20,120)) #pos = (x,y)
         self.alfavalXmin = wx.TextCtrl(Rpanel, -1, "Alfa min value", pos=(180,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
         self.alfavalXmax = wx.TextCtrl(Rpanel, -1, "Alfa max value", pos=(310,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
-        
-
-
         #Emin box parameters
         EminLabel = "Emin parameter"
         self.EminValTextSync = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,150)) #pos = (x,y)
@@ -167,8 +153,6 @@ class Alpha(wx.Frame):
         self.EminValTextSync = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,180)) #pos = (x,y)
         self.EminvalXmin = wx.TextCtrl(Rpanel, -1, "Emin min value", pos=(180,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
         self.EminvalXmax = wx.TextCtrl(Rpanel, -1, "Emin max value", pos=(310,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
-
-
         #Ecut box parameters
         EcutLabel = "Ecut parameter"
         self.EcutValTextSync = wx.StaticText(Rpanel, -1, EcutLabel, pos=(20,210)) #pos = (x,y)
@@ -179,13 +163,9 @@ class Alpha(wx.Frame):
         self.EcutValTextSync = wx.StaticText(Rpanel, -1, EcutLabel, pos=(20,240)) #pos = (x,y)
         self.EcutvalXmin = wx.TextCtrl(Rpanel, -1, "Ecut min value", pos=(180,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
         self.EcutvalXmax = wx.TextCtrl(Rpanel, -1, "Ecut max value", pos=(310,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
-        
-
         #Fit button
         self.buttonChargeSVal = wx.Button(Rpanel,16, "Fit", (600,390))
         self.Bind(wx.EVT_BUTTON, self.getValues_fit_sync, id = 16)
-
-
         ########################################################################################
         ### Now I will disapear all the elements of this screen
         ########################################################################################
@@ -228,6 +208,89 @@ class Alpha(wx.Frame):
         self.buttonComp = wx.Button(Lpanel,12,"Inverse Compton \n fit Root" ,(10,185))
         wx.StaticText(Lpanel, -1, "Make fit of the Inverse \n Compton scattering" , pos = (10,250))
         self.Bind(wx.EVT_BUTTON, self.InvCom, id = 12)
+
+        #######################################################################################
+        ### Definition of the elements of the Inverse Compton screen
+        #######################################################################################
+
+
+        #A0 box parameters
+        A0Label_Inv = "A0 parameter"
+        self.A0val_InvTextInvc = wx.StaticText(Rpanel, -1, A0Label_Inv, pos=(20,30)) #pos = (x,y)
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_Inv = wx.TextCtrl(Rpanel, -1, "AInvc value", pos=(180,30), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixA0_Inv = wx.CheckBox(Rpanel, -1, "Fix A0", pos = (310, 30))        
+        A0Label_Inv = "A0 parameter range"
+        self.A0val_InvTextInvc = wx.StaticText(Rpanel, -1, A0Label_Inv, pos=(20,60)) #pos = (x,y)
+        self.A0val_InvXmin = wx.TextCtrl(Rpanel, -1, "A0 min value", pos=(180,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.A0val_InvXmax = wx.TextCtrl(Rpanel, -1, "A0 max value", pos=(310,60), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        #alfa box parameters
+        alfaLabel_Inv = "Alfa parameter"
+        self.alfaval_InvTextInvc = wx.StaticText(Rpanel, -1, alfaLabel_Inv, pos=(20,90)) #pos = (x,y)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_Inv = wx.TextCtrl(Rpanel, -1, "Alfa value", pos=(180,90), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixalfa_Inv = wx.CheckBox(Rpanel, -1, "Fix Alfa", pos = (310, 90))
+        alfaLabel_Inv = "Alfa parameter range"
+        self.alfaval_InvTextInvc = wx.StaticText(Rpanel, -1, alfaLabel_Inv, pos=(20,120)) #pos = (x,y)
+        self.alfaval_InvXmin = wx.TextCtrl(Rpanel, -1, "Alfa min value", pos=(180,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.alfaval_InvXmax = wx.TextCtrl(Rpanel, -1, "Alfa max value", pos=(310,120), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        #Emin box parameters
+        EminLabel = "Emin parameter"
+        self.Eminval_InvTextInvc = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,150)) #pos = (x,y)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_Inv = wx.TextCtrl(Rpanel, -1, "Emin value", pos=(180,150), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixEmin_Inv = wx.CheckBox(Rpanel, -1, "Fix Emin", pos = (310, 150))
+        EminLabel = "Emin parameter range"
+        self.Eminval_InvTextInvc = wx.StaticText(Rpanel, -1, EminLabel, pos=(20,180)) #pos = (x,y)
+        self.Eminval_InvXmin_Inv = wx.TextCtrl(Rpanel, -1, "Emin min value", pos=(180,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.Eminval_InvXmax_Inv = wx.TextCtrl(Rpanel, -1, "Emin max value", pos=(310,180), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        #Ecut box parameters
+        EcutLabel_Inv = "Ecut parameter"
+        self.Ecutval_InvTextInvc = wx.StaticText(Rpanel, -1, EcutLabel_Inv, pos=(20,210)) #pos = (x,y)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_Inv = wx.TextCtrl(Rpanel, -1, "Ecut value", pos=(180,210), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.fixEcut_Inv = wx.CheckBox(Rpanel, -1, "Fix Ecut", pos = (310, 210))
+        EcutLabel_Inv = "Ecut parameter range"
+        self.Ecutval_InvTextInvc = wx.StaticText(Rpanel, -1, EcutLabel_Inv, pos=(20,240)) #pos = (x,y)
+        self.Ecutval_InvXmin = wx.TextCtrl(Rpanel, -1, "Ecut min value", pos=(180,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        self.Ecutval_InvXmax = wx.TextCtrl(Rpanel, -1, "Ecut max value", pos=(310,240), size=(100,25), style=wx.TE_PROCESS_ENTER)
+        #Fit button
+        self.buttonChargeSVal_Inv = wx.Button(Rpanel,16, "Fit", (600,390))
+        self.Bind(wx.EVT_BUTTON, self.getValues_fit_Invc, id = 17)
+        ########################################################################################
+        ### Now I will disapear all the elements of this screen
+        ########################################################################################
+        self.A0val_InvTextInvc.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        #---
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_Inv.Show(False)
+        self.fixA0_Inv.Show(False)
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_InvXmin.Show(False)
+        self.A0val_InvXmax.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_Inv.Show(False)
+        self.fixalfa_Inv.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_InvXmin.Show(False)
+        self.alfaval_InvXmax.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_Inv.Show(False)
+        self.fixEmin_Inv.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_InvXmin_Inv.Show(False)
+        self.Eminval_InvXmax_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_Inv.Show(False)
+        self.fixEcut_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_InvXmin.Show(False)
+        self.Ecutval_InvXmax.Show(False)
+        self.buttonChargeSVal_Inv.Show(False)
+        #--
 
         ########################################################################################
         #** Smoothing the graph
@@ -312,6 +375,39 @@ class Alpha(wx.Frame):
         self.buttonChargeSVal.Show(False)
         #--
         ########################################################################################
+        ### Now I will disapear all the elements of Inverse Compton
+        ########################################################################################
+        self.A0val_InvTextInvc.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        #---
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_Inv.Show(False)
+        self.fixA0_Inv.Show(False)
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_InvXmin.Show(False)
+        self.A0val_InvXmax.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_Inv.Show(False)
+        self.fixalfa_Inv.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_InvXmin.Show(False)
+        self.alfaval_InvXmax.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_Inv.Show(False)
+        self.fixEmin_Inv.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_InvXmin_Inv.Show(False)
+        self.Eminval_InvXmax_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_Inv.Show(False)
+        self.fixEcut_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_InvXmin.Show(False)
+        self.Ecutval_InvXmax.Show(False)
+        self.buttonChargeSVal_Inv.Show(False)
+        #--
         
         
         wildCard = "Data files (*.dat)|*.dat;" #Here we define that we can only read
@@ -372,6 +468,40 @@ class Alpha(wx.Frame):
         self.messageCharge.Show(False)
         self.lBox.Show(False)
         self.buttonCharge.Show(False)
+        ########################################################################################
+        ### Now I will disapear all the elements of Inverse Compton
+        ########################################################################################
+        self.A0val_InvTextInvc.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        #---
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_Inv.Show(False)
+        self.fixA0_Inv.Show(False)
+        self.A0val_InvTextInvc.Show(False)
+        self.A0val_InvXmin.Show(False)
+        self.A0val_InvXmax.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_Inv.Show(False)
+        self.fixalfa_Inv.Show(False)
+        self.alfaval_InvTextInvc.Show(False)
+        self.alfaval_InvXmin.Show(False)
+        self.alfaval_InvXmax.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_Inv.Show(False)
+        self.fixEmin_Inv.Show(False)
+        self.Eminval_InvTextInvc.Show(False)
+        self.Eminval_InvXmin_Inv.Show(False)
+        self.Eminval_InvXmax_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_Inv.Show(False)
+        self.fixEcut_Inv.Show(False)
+        self.Ecutval_InvTextInvc.Show(False)
+        self.Ecutval_InvXmin.Show(False)
+        self.Ecutval_InvXmax.Show(False)
+        self.buttonChargeSVal_Inv.Show(False)
+        #--
         
         ###########################################################################
         #Now I will define the elements that could be on the fit parameters    ####
@@ -412,7 +542,8 @@ class Alpha(wx.Frame):
         self.EcutvalXmin.Show(True)
         self.EcutvalXmax.Show(True)
         ###########################################################################
-
+        ### Now I wii desapear the elements of inverse compton screen
+        ###########################################################################
         #Button to load the fit parameters of syncrotron radiation
         self.buttonChargeSVal.Show(True)
         
@@ -423,9 +554,21 @@ class Alpha(wx.Frame):
         Invoque the window to make the fit on the Inverse Compton Scattering
         '''
 
+
         ########################################################################################
         ### Now I will disapear all the elements of this screen
         ########################################################################################
+
+        ###########################################################################
+        ########## I will now disappear all the not sync elements of the panel ####
+        ###########################################################################
+        self.messageWelcome.Show(False)
+        self.messageCharge.Show(False)
+        self.lBox.Show(False)
+        self.buttonCharge.Show(False)
+
+        ########################################################################################    
+
         self.A0ValTextSync.Show(False)
         self.alfaValTextSync.Show(False)
         self.EminValTextSync.Show(False)
@@ -456,7 +599,39 @@ class Alpha(wx.Frame):
         self.EcutvalXmin.Show(False)
         self.EcutvalXmax.Show(False)
         self.buttonChargeSVal.Show(False)
-        #--
+        ###########################################################################
+        #Now I will define the elements that could be on the fit parameters    ####
+        ###########################################################################
+        self.A0val_InvTextInvc.Show(True)
+        self.alfaval_InvTextInvc.Show(True)
+        self.Eminval_InvTextInvc.Show(True)
+        self.Ecutval_InvTextInvc.Show(True)
+        #---
+        self.A0val_InvTextInvc.Show(True)
+        self.A0val_Inv.Show(True)
+        self.fixA0_Inv.Show(True)
+        self.A0val_InvTextInvc.Show(True)
+        self.A0val_InvXmin.Show(True)
+        self.A0val_InvXmax.Show(True)
+        self.alfaval_InvTextInvc.Show(True)
+        self.alfaval_Inv.Show(True)
+        self.fixalfa_Inv.Show(True)
+        self.alfaval_InvTextInvc.Show(True)
+        self.alfaval_InvXmin.Show(True)
+        self.alfaval_InvXmax.Show(True)
+        self.Eminval_InvTextInvc.Show(True)
+        self.Eminval_Inv.Show(True)
+        self.fixEmin_Inv.Show(True)
+        self.Eminval_InvTextInvc.Show(True)
+        self.Eminval_InvXmin_Inv.Show(True)
+        self.Eminval_InvXmax_Inv.Show(True)
+        self.Ecutval_InvTextInvc.Show(True)
+        self.Ecutval_Inv.Show(True)
+        self.fixEcut_Inv.Show(True)
+        self.Ecutval_InvTextInvc.Show(True)
+        self.Ecutval_InvXmin.Show(True)
+        self.Ecutval_InvXmax.Show(True)
+        self.buttonChargeSVal_Inv.Show(True)
         
         pass
 
@@ -506,6 +681,11 @@ class Alpha(wx.Frame):
         print stringValue10, "Ann"
         return
 
+
+    def getValues_fit_Invc(self, event):
+        stringValue10 = self.A0val.GetValue()
+        print stringValue10, "Dee Dee"
+        return
 
 
     def Evtexit(self, event):
